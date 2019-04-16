@@ -14,13 +14,13 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 
-browser =  webdriver.Chrome()
-browser=browser.get("ttps://www.similartech.com/account/login")
-browser.find_element_by_xpath('//*[@id="regFormPh"]/div[2]/div/div/form/div[2]/div/div[1]/label/input"]').send_keys('wangjiah_7144@qq.com') #输入用户名
+browser = webdriver.Chrome()
+browser = browser.get("https://www.similartech.com/account/login")
+browser.find_element_by_name('UserName').send_keys('wangjiah_7144@qq.com') #输入用户名
 time.sleep(2)
-browser.find_element_by_xpath('//*[@id="regFormPh"]/div[2]/div/div/form/div[2]/div/div[2]/label/input').send_keys('775773312') #输入密码
+browser.find_element_by_name('Password').send_keys('775773312') #输入密码
 time.sleep(3)
-browser.find_element_by_xpath('//*[@id="regFormPh"]/div[2]/div/div/form/div[3]/div/div/button/span').submit() #点击登陆
+browser.find_element_by_xpath('css=.input-group>.ladda-button').click() #点击登陆
 pickle.dump( browser.get_cookies() , open("cookies.pkl","wb"))
 cookies = pickle.load(open("cookies.pkl", "rb"))
 for cookie in cookies:
@@ -30,6 +30,7 @@ for cookie in cookies:
 data=[]
 t1=time.time()
 companies = ['topshop.com', 'zara.com']
+'''
 for company in companies:
         url="https://www.similartech.com/websites/"+company
         browser.get(url)
@@ -50,3 +51,4 @@ for company in companies:
 
 
 
+'''
