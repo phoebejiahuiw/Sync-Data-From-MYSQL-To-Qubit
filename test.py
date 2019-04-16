@@ -11,6 +11,10 @@ def login_me(browser, username='', password=''):
     ----------
     browser : selenium.webdriver.chrome.webdriver.WebDriver
         A browser instance with may or may not logged in.
+    username : string
+        A username to fill in.
+    password : string
+        A password to fill in.
 
     Return
     ------
