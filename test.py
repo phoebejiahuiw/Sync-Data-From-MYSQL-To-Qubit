@@ -4,30 +4,57 @@ from selenium import webdriver
 from config import USERNAME, PASSWORD
 # from bs4 import BeautifulSoup
 
-browser = webdriver.Chrome()
-browser.get("https://www.similartech.com/websites/topshop.com")
 
-time.sleep(1)
+def login_me(browser, username='', password=''):
+    ''' Login function, can be used anywhere.
+    Parameters
+    ----------
+    browser : selenium.webdriver.chrome.webdriver.WebDriver
+        A browser instance with may or may not logged in.
 
-button1 = browser.find_element_by_id('topLoginBtn')
-button1.click()
+    Return
+    ------
+    browser : selenium.webdriver.chrome.webdriver.WebDriver
+        A browser instance with which already logged in.
+    '''
+    if (not username) or (not password):
+        raise Exception('Username or password empty!')
 
-time.sleep(1)
+    browser.get("https://www.similartech.com/websites/topshop.com")
+    time.sleep(1)
 
-username = browser.find_element_by_name('UserName')
-username.send_keys(USERNAME)
+    button1 = browser.find_element_by_id('topLoginBtn')
+    button1.click()
+    time.sleep(1)
 
-time.sleep(1)
-password = browser.find_element_by_name('Password')
-password.send_keys(PASSWORD)
+    username1 = browser.find_element_by_name('UserName')
+    username1.send_keys(username)
+    time.sleep(1)
 
-rememberme = browser.find_element_by_name('RememberMe')
-rememberme.click()
+    password1 = browser.find_element_by_name('Password')
+    password1.send_keys(password)
+    time.sleep(1)
 
-time.sleep(1)
+    rememberme = browser.find_element_by_name('RememberMe')
+    rememberme.click()
+    time.sleep(1)
 
-login = browser.find_element_by_xpath('//*[@id="nav"]/div/div[3]/div[2]/div[2]/div/div/form/div[3]/div/div/button')
-login.click()
+    login = browser.find_element_by_xpath('//*[@id="nav"]/div/div[3]/div[2]/div[2]/div/div/form/div[3]/div/div/button')
+    login.click()
+    time.sleep(1)
+
+    return browser
+
+
+if __name__ == "__main__":
+    ''' Main Program starts! '''
+    browser = webdriver.Chrome()
+    browser = login_me(browser, username=USERNAME, password=PASSWORD)
+
+    # Now, go to other pages... browser.get('http://.... somewhere else')
+    # Don't forget to close the browser once you have done with it... browser.close()
+
+
 
 # pickle.dump( browser.get_cookies() , open("cookies.pkl","wb"))
 # cookies = pickle.load(open("cookies.pkl", "rb"))
